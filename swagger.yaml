@@ -1,0 +1,274 @@
+openapi: 3.0.0
+info:
+  title: E-commerce APP
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://e-commerce-web3.herokuapp.com/api/v1
+  variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+      - Auth
+      summary: Register
+      operationId: Register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+            example:
+              username: Daniel
+              email: daniel@gmail.com
+              password: daniel
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              username: daniel
+              email: daniel@gmail.com
+              password: daniel
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /admin:
+    post:
+      tags:
+      - Product-Admin
+      summary: Admin Creates Product
+      operationId: AdminCreatesProduct
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminCreatesProductRequest'
+            example:
+              name: Bags
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    get:
+      tags:
+      - Product-Admin
+      summary: Admin Gets All Products
+      operationId: AdminGetsAllProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /admin/{product_name}:
+    get:
+      tags:
+      - Product-Admin
+      summary: Admin Gets A Single Product
+      operationId: AdminGetsASingleProduct
+      parameters:
+      - name: product_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /admin/{id}:
+    delete:
+      tags:
+      - Product-Admin
+      summary: Admin Deletes A Product
+      operationId: AdminDeletesAProduct
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+    patch:
+      tags:
+      - Product-Admin
+      summary: Admin Updates A Product
+      operationId: AdminUpdatesAProduct
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminUpdatesAProductRequest'
+            example:
+              name: food
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /products:
+    get:
+      tags:
+      - User Req
+      summary: User Gets All Products
+      operationId: UserGetsAllProducts
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+  /products/{product_name}:
+    get:
+      tags:
+      - User Req
+      summary: User Gets A Single Product
+      operationId: UserGetsASingleProduct
+      parameters:
+      - name: product_name
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security:
+      - bearer: []
+components:
+  schemas:
+    RegisterRequest:
+      title: RegisterRequest
+      required:
+      - username
+      - email
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        username: Daniel
+        email: daniel@gmail.com
+        password: daniel
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - username
+      - email
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        username: daniel
+        email: daniel@gmail.com
+        password: daniel
+    AdminCreatesProductRequest:
+      title: AdminCreatesProductRequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Bags
+    AdminDeletesAProductRequest:
+      title: AdminDeletesAProductRequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: Mobilephones
+    AdminUpdatesAProductRequest:
+      title: AdminUpdatesAProductRequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: food
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+- name: Auth
+  description: ''
+- name: Product-Admin
+  description: ''
+- name: User Req
+  description: ''
